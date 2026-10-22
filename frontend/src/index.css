@@ -1,0 +1,118 @@
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/instrument-sans";
+@import "tailwindcss";
+
+/* Design tokens (see NOTES/plan): one violet accent on a cool white page. */
+@theme {
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #1e1b2e;
+  --color-muted: #615c75;
+  --color-paper: #fafafc;
+  --color-line: #e6e3f0; /* decorative borders only */
+  --color-control: #878399; /* outlines that identify a control: 3.66:1 on white (WCAG 1.4.11) */
+  --color-violet: #6d4aff;
+  --color-violet-deep: #4b2fd1;
+  --color-violet-50: #f1edff;
+
+  /* page-card colour groups (src/lib/pageColors.ts) */
+  --color-lilac: #eee8ff;
+  --color-lilac-ink: #5b3cc4;
+  --color-sky: #e2f0ff;
+  --color-sky-ink: #1e5fad;
+  --color-mint: #dff6ec;
+  --color-mint-ink: #127a55;
+  --color-peach: #ffe9dc;
+  --color-peach-ink: #a14a22; /* 5.1:1 on peach (was #b4532a, 4.26:1) */
+  --color-butter: #fff4cc;
+  --color-butter-ink: #7a5d00;
+  --color-stone: #f0eff4;
+  --color-stone-ink: #615c75;
+
+  --radius-card: 18px;
+  --radius-panel: 28px;
+
+  --shadow-soft: 0 1px 2px rgb(30 27 46 / 0.06), 0 12px 32px -16px rgb(76 47 209 / 0.22);
+  --shadow-lift: 0 1px 2px rgb(30 27 46 / 0.08), 0 20px 44px -18px rgb(76 47 209 / 0.32);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-ink;
+    letter-spacing: -0.02em;
+    font-optical-sizing: auto;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-violet);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility dot-grid {
+  /* blueprint paper: the plan sits on this */
+  background-color: #fff;
+  background-image: radial-gradient(circle at 1px 1px, var(--color-line) 1.2px, transparent 0);
+  background-size: 18px 18px;
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 16px;
+  @media (width >= 40rem) {
+    padding-inline: 24px;
+  }
+}
+
+/* The one page-load moment: the hero plan assembles itself. */
+@keyframes plan-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes line-in {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@utility animate-plan-in {
+  animation: plan-in 360ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@utility animate-line-in {
+  transform-origin: top;
+  animation: line-in 240ms ease-out both;
+}
