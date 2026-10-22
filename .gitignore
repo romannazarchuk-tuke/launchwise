@@ -1,0 +1,38 @@
+# secrets / local settings
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Node / frontend build
+node_modules/
+dist/
+build/
+
+# logs, database dumps, temp files
+*.log
+*.dump
+*.sql.gz
+*.tmp
+tmp/
+
+# Playwright / QA artifacts
+qa/screenshots/
+test-results/
+playwright-report/
+*.trace.zip
+
+# editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
